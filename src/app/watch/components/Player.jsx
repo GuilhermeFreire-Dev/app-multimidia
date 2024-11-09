@@ -6,5 +6,5 @@ export default function Player() {
         <source src="https://tekeye.uk/html/images/Joren_Falls_Izu_Jap.mp4" type="video/mp4"/>
       </video>
     </div>
-  )
+  );
 }

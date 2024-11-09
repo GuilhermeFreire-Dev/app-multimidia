@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Container from "@/app/components/container";
 import Player from "@/app/watch/components/Player";
 import {useSearchParams} from "next/navigation";
@@ -26,5 +26,5 @@ export default function Watch() {
         </article>
       </Container>
     </>
-  )
+  );
 }

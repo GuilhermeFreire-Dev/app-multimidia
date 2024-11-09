@@ -4,5 +4,5 @@ export default function Banner() {
     <div className="w-full rounded-3xl h-96 bg-neutral-800">
 
     </div>
-  )
+  );
 }
