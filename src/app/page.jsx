@@ -6,7 +6,7 @@ import Carousel from "./components/carousel";
 import Maps from "./components/maps";
 import { Bebas_Neue } from "next/font/google";
 import { Content } from "./lib/content";
-import { getCarousels, getSections } from "./lib/contentful";
+import {getCarousels, getContent, getSections, parseFromMedias} from "./lib/contentful";
 import Background from "./components/background";
 import Banner from "@/app/components/banner";
 import Card from "@/app/components/card";
@@ -16,8 +16,11 @@ const bebasNeue = Bebas_Neue({ subsets: ["latin"], weight: "400" });
 
 export default async function Home() {
 
-  // Content.carousels = await getCarousels()
-  // Content.sections = await getSections()
+  Content.media = parseFromMedias(
+    await getContent("media")
+  );
+
+  console.log(Content.media);
 
   return (
     <>
