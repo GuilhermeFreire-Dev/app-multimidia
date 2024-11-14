@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Container  from "./components/container";
-import Title from "./components/title";
+import Title, {TitleSize} from "./components/title";
 import Text from "./components/text";
 import Carousel from "./components/carousel";
 import Maps from "./components/maps";
@@ -27,13 +27,16 @@ export default async function Home() {
       <Container>
         <Banner></Banner>
       </Container>
+      <Title title={"Conteúdos disponíveis"} size={TitleSize.h3}></Title>
       <Container>
         <Grid cols={4}>
-          <Card contentId={"123"}></Card>
-          <Card></Card>
-          <Card></Card>
-          <Card></Card>
-          <Card></Card>
+          {
+            Content.media.map((media) => {
+              return (
+                <Card key={media.id} contentId={media.id} thumb={media.thumb}></Card>
+              );
+            })
+          }
         </Grid>
       </Container>
     </>
