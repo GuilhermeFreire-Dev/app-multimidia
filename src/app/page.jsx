@@ -1,13 +1,10 @@
 import Container  from "./components/container";
 import Title, {TitleSize} from "./components/title";
-import { Bebas_Neue } from "next/font/google";
 import { Content } from "./lib/content";
 import {getContent, parseFromMedias} from "./lib/contentful";
 import Banner from "@/app/components/banner";
 import Card from "@/app/components/card";
 import Grid from "@/app/components/grid";
-
-const bebasNeue = Bebas_Neue({ subsets: ["latin"], weight: "400" });
 
 export default async function Home() {
 

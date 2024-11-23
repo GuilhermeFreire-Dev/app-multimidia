@@ -1,9 +1,8 @@
 "use client";
 import Image from "next/image";
 import {LuUser2} from "react-icons/lu";
-import { useState } from "react";
 
-export default function Navbar({content}) {
+export default function Navbar() {
 
   return (
     <header className="flex items-center w-full m-auto px-3 py-6 md:w-4/5 sm:justify-between sm:py-5 sm:px-8 lg:py-5 lg:px-16 lg:min-h-28">
