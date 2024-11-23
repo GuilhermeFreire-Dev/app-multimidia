@@ -1,6 +1,22 @@
-export async function getContent(contentId = "") {
+export const ContentTypeEnum = {
+  ASSETS: "assets",
+  ENTRIES: "entries",
+};
+
+export async function getContent(
+  contentId = "",
+  contentType = ContentTypeEnum.ENTRIES,
+  getSingle = false,
+  objectId = ""
+) {
   try {
-    return await requestContentful(`${process.env.CONTENTFUL_URL}/spaces/${process.env.CONTENTFUL_SPACE}/environments/${process.env.CONTENTFUL_ENVIRONMENT}/entries?access_token=${process.env.CONTENTFUL_TOKEN}&sys.contentType.sys.id=${contentId}`);
+    let url = `${process.env.CONTENTFUL_URL}/spaces/${process.env.CONTENTFUL_SPACE}/environments/${process.env.CONTENTFUL_ENVIRONMENT}/${contentType}`;
+    if ((ContentTypeEnum.ASSETS || getSingle) && objectId !== "") {
+      url += `/${objectId}?access_token=${process.env.CONTENTFUL_TOKEN}`;
+    } else {
+      url += `?access_token=${process.env.CONTENTFUL_TOKEN}&sys.contentType.sys.id=${contentId}`;
+    }
+    return await requestContentful(url);
   } catch (error) {
     return null;
   }
@@ -51,33 +67,33 @@ export function parseFromMedias(response) {
   return medias;
 }
 
-function parseSections(response) {
-  let sections = [];
-  sections = response.items.map(item => {
-    return {
-      id: item.sys.id,
-      title: item.fields.title,
-      text: item.fields.text,
-      image: {
-        id: item.fields.image.sys.id
-      }
-    };
-  });
+export async function parseFromMedia(response) {
+  const media = {
+    id: response.sys.id,
+    title: response.fields.title,
+    description: response.fields.description,
+    created_at: response.sys.createdAt,
+    updated_at: response.sys.updatedAt,
+    thumb: {},
+    content: {}
+  };
 
-  sections.map(section => {
-    const asset = response.includes.Asset.find(asset => {
-      return asset.sys.id === section.image.id;
-    });
-    section.image.title = asset.fields.title;
-    section.image.url = `https:${asset.fields.file.url}`;
-    return section;
-  });
+  const thumb_id = response.fields.thumb.sys.id;
+  const content_id = response.fields.content.sys.id;
 
-  return sections;
-}
+  const thumb = await getContent("", ContentTypeEnum.ASSETS, true, thumb_id);
 
-function parseContacts(response) {
-  return response.items.map(item => {
-    return item.fields;
-  });
+  media.thumb.id = thumb.sys.id;
+  media.thumb.title = thumb.fields.title;
+  media.thumb.description = thumb.fields.description;
+  media.thumb.url = `https:${thumb.fields.file.url}`;
+
+  const content = await getContent("", ContentTypeEnum.ASSETS, true, content_id);
+
+  media.content.id = content.sys.id;
+  media.content.title = content.fields.title;
+  media.content.description = content.fields.description;
+  media.content.url = `https:${content.fields.file.url}`;
+
+  return media;
 }

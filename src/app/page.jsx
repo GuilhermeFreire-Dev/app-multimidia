@@ -1,13 +1,8 @@
-import Image from "next/image";
 import Container  from "./components/container";
 import Title, {TitleSize} from "./components/title";
-import Text from "./components/text";
-import Carousel from "./components/carousel";
-import Maps from "./components/maps";
 import { Bebas_Neue } from "next/font/google";
 import { Content } from "./lib/content";
-import {getCarousels, getContent, getSections, parseFromMedias} from "./lib/contentful";
-import Background from "./components/background";
+import {getContent, parseFromMedias} from "./lib/contentful";
 import Banner from "@/app/components/banner";
 import Card from "@/app/components/card";
 import Grid from "@/app/components/grid";
@@ -20,8 +15,6 @@ export default async function Home() {
     await getContent("media")
   );
 
-  console.log(Content.media);
-
   return (
     <>
       <Container>
@@ -33,7 +26,7 @@ export default async function Home() {
           {
             Content.media.map((media) => {
               return (
-                <Card key={media.id} contentId={media.id} thumb={media.thumb}></Card>
+                <Card key={media.id} contentId={media.id} thumb={media.thumb} title={media.title}></Card>
               );
             })
           }

@@ -1,7 +1,7 @@
 "use client";
 import {LuClapperboard} from "react-icons/lu";
 
-export default function Card({contentId, thumb}) {
+export default function Card({contentId, thumb, title}) {
 
   function redirect() {
     if (contentId) {
@@ -23,14 +23,14 @@ export default function Card({contentId, thumb}) {
   return (
     <div onClick={redirect} className={"cursor-pointer"}>
       <div
-        className="bg-neutral-800 relative rounded-xl w-44 h-64 flex flex-col items-center justify-center">
+        className="bg-neutral-800 relative rounded-xl w-36 h-56 flex flex-col items-center justify-center md:w-44 md:h-64 ">
         {getThumb()}
         <div
           className={"absolute transition ease-in-out delay-100 h-full w-full opacity-0 hover:opacity-100 hover:bg-neutral-950 hover:bg-opacity-60"}>
           <p className={"absolute bottom-32 w-full text-center"}>Assistir</p>
         </div>
       </div>
-      <p className={"pt-2"}>{thumb.title}</p>
+      <p className={"pt-2"}>{title}</p>
     </div>
   );
 }
