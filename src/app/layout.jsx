@@ -3,7 +3,7 @@ import Navbar from "./components/navbar";
 
 export const metadata = {
   title: "Multflix",
-  description: "Loja de bicicletas em Goiânia",
+  description: "Hospedagem de conteúdo multimídia",
   creator: "Guilherme Freire",
   publisher: "Vercel",
 };
