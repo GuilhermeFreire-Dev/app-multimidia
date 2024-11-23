@@ -1,6 +1,6 @@
 {
-  "name": "evolucao-bike",
-  "version": "1.1.1",
+  "name": "app-multimidia",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",

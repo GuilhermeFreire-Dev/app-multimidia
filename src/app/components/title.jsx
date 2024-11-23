@@ -1,12 +1,15 @@
-import { Bebas_Neue } from 'next/font/google'
+export const TitleSize = {
+  h1: "text-4xl",
+  h2: "text-3xl",
+  h3: "text-2xl",
+  h4: "text-xl",
+  h5: "text-lg",
+};
 
-const bebasNeue = Bebas_Neue({ subsets: ['latin'], weight: '400' })
-
-export default function Title({title, className}) {
+export default function Title({title="", size=TitleSize.h1}) {
   return (
-    <div className="flex items-center mb-5">
-      <h1 className={`${bebasNeue.className} whitespace-nowrap mr-5 text-2xl sm:text-4xl ${className}`}>{ title }</h1>
-      <hr className="border-stone-950 border-y-2 w-full sm:hidden" />
+    <div className="m-auto w-4/5 py-2 sm:w-2/3 sm:py-2">
+      <h1 className={`font-bold ${size.toString()}`}>Conteúdos disponíveis</h1>
     </div>
-  )
+  );
 }
