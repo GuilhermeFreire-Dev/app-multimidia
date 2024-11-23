@@ -34,6 +34,11 @@ async function requestContentful(url = "") {
 
 export function parseFromMedias(response) {
   let medias = [];
+
+  if (!response.items) {
+    return medias;
+  }
+
   medias = response.items.map(item => {
     return {
       id: item.sys.id,
@@ -68,6 +73,11 @@ export function parseFromMedias(response) {
 }
 
 export async function parseFromMedia(response) {
+
+  if (!response.sys || !response.fields) {
+    return {};
+  }
+
   const media = {
     id: response.sys.id,
     title: response.fields.title,
