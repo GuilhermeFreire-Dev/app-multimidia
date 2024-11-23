@@ -8,9 +8,9 @@ import Grid from "@/app/components/grid";
 
 export default async function Home() {
 
-  // Content.media = parseFromMedias(
-  //   await getContent("media")
-  // );
+  Content.media = parseFromMedias(
+    await getContent("media")
+  );
 
   return (
     <>
